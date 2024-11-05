@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telecommunication Support Footer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap'); /* Gothic font for header */
+
+        .footer {
+            background-color: #000; /* Pure black background */
+            color: #b8860b; /* Darker gold */
+            padding: 40px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .footer h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #b8860b; /* Dark gold for main header */
+            margin-bottom: 20px;
+            font-family: 'UnifrakturCook', serif; /* Gothic font for a spiky, old-English style */
+        }
+        /* Horizontal scroll container */
+        .categories-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 10px;
+            padding-bottom: 10px;
+            padding-top: 20px;
+        }
+        .category {
+            flex: 0 0 80%; /* Adjusts the width of each category for easier swiping */
+            max-width: 300px;
+            scroll-snap-align: start;
+            background-color: #111;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+        }
+        .category h3 {
+            font-size: 20px;
+            color: #b8860b; /* Darker gold for section titles */
+            margin-bottom: 10px;
+            border-bottom: 2px solid #8b7500; /* Darker border for underline */
+            padding-bottom: 5px;
+        }
+        .link-box {
+            background-color: #222; /* Darker background for each link box */
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 5px 0;
+            text-align: center;
+            border: 1px solid #b8860b; /* Dark gold border for link boxes */
+        }
+        .footer a {
+            color: #b8860b; /* Darker gold color for links */
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+            color: #daa520; /* Slightly brighter gold on hover */
+        }
+    </style>
+</head>
+<body>
+
+<footer class="footer">
+    <h2>Telecommunication Support</h2>
+    <div class="categories-container">
+        
+        <!-- Support Section -->
+        <div class="category">
+            <h3>Support</h3>
+            <div class="link-box"><a href="#">Customer Experience Support by Smashing Goods Support</a></div>
+            <div class="link-box"><a href="#">Online Support by Arturo Technologies</a></div>
+            <div class="link-box"><a href="#">Replacement Parts by Fractal Galaxy</a></div>
+        </div>
+        
+        <!-- Policies Section -->
+        <div class="category">
+            <h3>Policies</h3>
+            <div class="link-box"><a href="#">Privacy Policy by Martinez Worldwide</a></div>
+            <div class="link-box"><a href="#">Investor Relations by Martinez USA</a></div>
+            <div class="link-box"><a href="#">Standardization by REASONS</a></div>
+        </div>
+        
+        <!-- Engineering Section -->
+        <div class="category">
+            <h3>Engineering</h3>
+            <div class="link-box"><a href="#">Distribution Map by Arturo Engineering</a></div>
+            <div class="link-box"><a href="#">Engineering Management by Martinez Industries</a></div>
+            <div class="link-box"><a href="#">Clean Energy by Fast Solar Energy Group</a></div>
+        </div>
+
+        <!-- Labor & Defense Section -->
+        <div class="category">
+            <h3>Labor & Defense</h3>
+            <div class="link-box"><a href="#">Built on Labor by Moco Pools</a></div>
+            <div class="link-box"><a href="#">Defended by BANCS</a></div>
+        </div>
+        
+    </div>
+</footer>
+
+</body>
+</html>
