@@ -8,8 +8,8 @@
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap'); /* Gothic font for header */
 
         .footer {
-            background-color: #000; /* Pure black background */
-            color: #b8860b; /* Darker gold */
+            background-color: #000;
+            color: #b8860b;
             padding: 40px;
             font-family: Arial, sans-serif;
             text-align: center;
@@ -21,20 +21,17 @@
             margin-bottom: 20px;
             font-family: 'UnifrakturCook', serif;
         }
-        /* Slider container */
         .slider-container {
             position: relative;
             overflow: hidden;
             width: 100%;
-            max-width: 600px; /* Limits width to prevent cut-off */
+            max-width: 600px;
             margin: 0 auto;
         }
-        /* Inner container for horizontal movement */
         .categories-container {
             display: flex;
             transition: transform 0.5s ease;
         }
-        /* Individual category styling */
         .category {
             min-width: 100%;
             padding: 20px;
@@ -44,22 +41,23 @@
             text-align: center;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
-        .category h3 {
+        .section-heading {
             font-size: 20px;
             color: #b8860b;
             margin-bottom: 10px;
             border-bottom: 2px solid #8b7500;
             padding-bottom: 5px;
+            font-family: Arial, sans-serif; /* Reverted to Arial */
         }
         .link-box {
-    background-color: #222; /* Darker background for each link box */
-    padding: 8px 12px; /* Adjust padding for a more compact button */
-    border-radius: 8px;
-    margin: 10px auto; /* Center the button */
-    text-align: center;
-    border: 1px solid #b8860b;
-    max-width: 200px; /* Limit the button length */
-}
+            background-color: #222;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin: 10px auto;
+            text-align: center;
+            border: 1px solid #b8860b;
+            max-width: 200px;
+        }
         .footer a {
             color: #b8860b;
             text-decoration: none;
@@ -82,6 +80,15 @@
             font-size: 20px;
             color: #b8860b;
         }
+
+.category h3 {
+    font-size: 20px;
+    color: #b8860b;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #8b7500; /* Creates an underline effect */
+    font-family: Arial, sans-serif; /* Reverts subtitle font to Arial */
+}
     </style>
 </head>
 <body>
@@ -92,25 +99,25 @@
         <div class="categories-container" id="slider">
             <!-- Example Sections -->
             <div class="category">
-                <h3>Support</h3>
+                <h3 class="section-heading">Support</h3>
                 <div class="link-box"><a href="#">Customer Experience Support by Smashing Goods Support</a></div>
                 <div class="link-box"><a href="#">Online Support by Arturo Technologies</a></div>
                 <div class="link-box"><a href="#">Replacement Parts by Fractal Galaxy</a></div>
             </div>
             <div class="category">
-                <h3>Policies</h3>
+                <h3 class="section-heading">Policies</h3>
                 <div class="link-box"><a href="#">Privacy Policy by Martinez Worldwide</a></div>
                 <div class="link-box"><a href="#">Investor Relations by Martinez USA</a></div>
                 <div class="link-box"><a href="#">Standardization by REASONS</a></div>
             </div>
             <div class="category">
-                <h3>Engineering</h3>
+                <h3 class="section-heading">Engineering</h3>
                 <div class="link-box"><a href="#">Distribution Map by Arturo Engineering</a></div>
                 <div class="link-box"><a href="#">Engineering Management by Martinez Industries</a></div>
                 <div class="link-box"><a href="#">Clean Energy by Fast Solar Energy Group</a></div>
             </div>
             <!-- Additional sections as necessary -->
-        <!-- Labor & Defense Section -->
+    <!-- Labor & Defense Section -->
         <div class="category">
             <h3>Labor & Defense</h3>
             <div class="link-box"><a href="#">Built on Labor by Moco Pools</a></div>
@@ -325,14 +332,15 @@
 </div>
 
 
+
+
         </div>
     </div>
     
-    <!-- Pagination Controls -->
     <div class="pagination">
-        <span class="arrow" onclick="previousPage()">&#9664;</span>
+        <span class="arrow previous" onclick="previousPage()">&#9664;</span>
         <span id="pageInfo">Page 1 of 3</span>
-        <span class="arrow" onclick="nextPage()">&#9654;</span>
+        <span class="arrow next" onclick="nextPage()">&#9654;</span>
     </div>
 </footer>
 
@@ -344,8 +352,10 @@
     const totalPages = categories.length;
 
     function updateSlider() {
-        slider.style.transform = `translateX(-${currentPage * 100}%)`;
-        pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+        window.requestAnimationFrame(() => {
+            slider.style.transform = `translateX(-${currentPage * 100}%)`;
+            pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+        });
     }
 
     function nextPage() {
@@ -362,11 +372,16 @@
         }
     }
 
+    // Add touch events for mobile compatibility
+    document.querySelector('.arrow.previous').addEventListener('touchstart', previousPage);
+    document.querySelector('.arrow.next').addEventListener('touchstart', nextPage);
+
     // Initial call to display the first page
     updateSlider();
 </script>
 
 </body>
 </html>
+
 
 
