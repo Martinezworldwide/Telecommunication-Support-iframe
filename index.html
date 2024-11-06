@@ -17,53 +17,58 @@
         .footer h2 {
             font-size: 24px;
             font-weight: bold;
-            color: #b8860b; /* Dark gold for main header */
+            color: #b8860b;
             margin-bottom: 20px;
-            font-family: 'UnifrakturCook', serif; /* Gothic font for a spiky, old-English style */
+            font-family: 'UnifrakturCook', serif;
         }
-        /* Horizontal scroll container */
+        /* Slider container */
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px; /* Limits width to prevent cut-off */
+            margin: 0 auto;
+        }
+        /* Inner container for horizontal movement */
         .categories-container {
             display: flex;
-            overflow: hidden; /* Hide overflow for pagination effect */
-            gap: 10px;
-            padding-bottom: 10px;
-            padding-top: 20px;
-            position: relative;
+            transition: transform 0.5s ease;
         }
+        /* Individual category styling */
         .category {
-            flex: 0 0 100%; /* Full width for each page */
-            max-width: 300px;
+            min-width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
             background-color: #111;
             border-radius: 8px;
-            padding: 15px;
+            text-align: center;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            margin: 0 auto;
-            transition: transform 0.3s ease-in-out;
         }
         .category h3 {
             font-size: 20px;
-            color: #b8860b; /* Darker gold for section titles */
+            color: #b8860b;
             margin-bottom: 10px;
-            border-bottom: 2px solid #8b7500; /* Darker border for underline */
+            border-bottom: 2px solid #8b7500;
             padding-bottom: 5px;
         }
         .link-box {
-            background-color: #222; /* Darker background for each link box */
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 5px 0;
-            text-align: center;
-            border: 1px solid #b8860b; /* Dark gold border for link boxes */
-        }
+    background-color: #222; /* Darker background for each link box */
+    padding: 8px 12px; /* Adjust padding for a more compact button */
+    border-radius: 8px;
+    margin: 10px auto; /* Center the button */
+    text-align: center;
+    border: 1px solid #b8860b;
+    max-width: 200px; /* Limit the button length */
+}
         .footer a {
-            color: #b8860b; /* Darker gold color for links */
+            color: #b8860b;
             text-decoration: none;
             font-size: 16px;
             font-weight: 500;
         }
         .footer a:hover {
             text-decoration: underline;
-            color: #daa520; /* Slightly brighter gold on hover */
+            color: #daa520;
         }
         .pagination {
             display: flex;
@@ -83,32 +88,28 @@
 
 <footer class="footer">
     <h2>Telecommunication Support</h2>
-    <div class="categories-container" id="slider">
-        
-        <!-- Support Section -->
-        <div class="category">
-            <h3>Support</h3>
-            <div class="link-box"><a href="#">Customer Experience Support by Smashing Goods Support</a></div>
-            <div class="link-box"><a href="#">Online Support by Arturo Technologies</a></div>
-            <div class="link-box"><a href="#">Replacement Parts by Fractal Galaxy</a></div>
-        </div>
-        
-        <!-- Policies Section -->
-        <div class="category">
-            <h3>Policies</h3>
-            <div class="link-box"><a href="#">Privacy Policy by Martinez Worldwide</a></div>
-            <div class="link-box"><a href="#">Investor Relations by Martinez USA</a></div>
-            <div class="link-box"><a href="#">Standardization by REASONS</a></div>
-        </div>
-        
-        <!-- Engineering Section -->
-        <div class="category">
-            <h3>Engineering</h3>
-            <div class="link-box"><a href="#">Distribution Map by Arturo Engineering</a></div>
-            <div class="link-box"><a href="#">Engineering Management by Martinez Industries</a></div>
-            <div class="link-box"><a href="#">Clean Energy by Fast Solar Energy Group</a></div>
-        </div>
-
+    <div class="slider-container">
+        <div class="categories-container" id="slider">
+            <!-- Example Sections -->
+            <div class="category">
+                <h3>Support</h3>
+                <div class="link-box"><a href="#">Customer Experience Support by Smashing Goods Support</a></div>
+                <div class="link-box"><a href="#">Online Support by Arturo Technologies</a></div>
+                <div class="link-box"><a href="#">Replacement Parts by Fractal Galaxy</a></div>
+            </div>
+            <div class="category">
+                <h3>Policies</h3>
+                <div class="link-box"><a href="#">Privacy Policy by Martinez Worldwide</a></div>
+                <div class="link-box"><a href="#">Investor Relations by Martinez USA</a></div>
+                <div class="link-box"><a href="#">Standardization by REASONS</a></div>
+            </div>
+            <div class="category">
+                <h3>Engineering</h3>
+                <div class="link-box"><a href="#">Distribution Map by Arturo Engineering</a></div>
+                <div class="link-box"><a href="#">Engineering Management by Martinez Industries</a></div>
+                <div class="link-box"><a href="#">Clean Energy by Fast Solar Energy Group</a></div>
+            </div>
+            <!-- Additional sections as necessary -->
         <!-- Labor & Defense Section -->
         <div class="category">
             <h3>Labor & Defense</h3>
@@ -324,16 +325,17 @@
 </div>
 
 
-
+        </div>
     </div>
-<div class="pagination">
+    
+    <!-- Pagination Controls -->
+    <div class="pagination">
         <span class="arrow" onclick="previousPage()">&#9664;</span>
-        <span id="pageInfo">Page 1 of 1</span>
+        <span id="pageInfo">Page 1 of 3</span>
         <span class="arrow" onclick="nextPage()">&#9654;</span>
     </div>
-
-
 </footer>
+
 <script>
     const slider = document.getElementById('slider');
     const categories = Array.from(slider.getElementsByClassName('category'));
@@ -342,7 +344,6 @@
     const totalPages = categories.length;
 
     function updateSlider() {
-        // Update the transform style to show the current page
         slider.style.transform = `translateX(-${currentPage * 100}%)`;
         pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
     }
@@ -361,11 +362,11 @@
         }
     }
 
-    // Initial call to set up the page display
+    // Initial call to display the first page
     updateSlider();
 </script>
 
-
-
 </body>
 </html>
+
+
