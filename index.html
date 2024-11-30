@@ -1,531 +1,580 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telecommunication Support Footer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telecommunication Support Footer</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
+/* Gothic font for header */
+.footer {
+  background-color: #000; /* Pure black background */
+  color: #b8860b; /* Darker gold */
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+.footer h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #b8860b; /* Dark gold for main header */
+  margin-bottom: 20px;
+  font-family: 'UnifrakturCook', serif; /* Gothic font for a spiky, old-English style */
+}
+.categories-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 10px;
+  padding-bottom: 10px;
+  padding-top: 20px;
+}
+.category {
+  flex: 0 0 80%;
+  max-width: 300px;
+  scroll-snap-align: start;
+  background-color: #111;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+}
+.category h3 {
+  font-size: 20px;
+  color: #b8860b;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #8b7500;
+  padding-bottom: 5px;
+}
+.link-box {
+  background-color: #222;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 5px 0;
+  text-align: center;
+  border: 1px solid #b8860b;
+}
+.footer a {
+  color: #b8860b;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+}
+.footer a:hover {
+  text-decoration: underline;
+  color: #daa520;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+.pagination button {
+  background-color: #b8860b;
+  color: #000;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+}
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.page-number {
+  font-size: 16px;
+  color: #b8860b;
+}
 
-</div>
-    <div class="pagination">
-        <button id="prevBtn">Previous</button>
-        <span class="page-number" id="pageNumber">Swipe Page 1 of 4</span>
-        <button id="nextBtn">Next</button>
-    </div>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap'); /* Gothic font for header */
-
-        .footer {
-            background-color: #000; /* Pure black background */
-            color: #b8860b; /* Darker gold */
-            padding: 40px;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .footer h2 {
-            font-size: 24px;
-            font-weight: bold;
-            color: #b8860b; /* Dark gold for main header */
-            margin-bottom: 20px;
-            font-family: 'UnifrakturCook', serif; /* Gothic font for a spiky, old-English style */
-        }
-        .categories-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 10px;
-            padding-bottom: 10px;
-            padding-top: 20px;
-        }
-        .category {
-            flex: 0 0 80%;
-            max-width: 300px;
-            scroll-snap-align: start;
-            background-color: #111;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            margin: 0 auto;
-        }
-        .category h3 {
-            font-size: 20px;
-            color: #b8860b;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #8b7500;
-            padding-bottom: 5px;
-        }
-        .link-box {
-            background-color: #222;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 5px 0;
-            text-align: center;
-            border: 1px solid #b8860b;
-        }
-        .footer a {
-            color: #b8860b;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-            color: #daa520;
-        }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-            gap: 20px;
-        }
-        .pagination button {
-            background-color: #b8860b;
-            color: #000;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 4px;
-        }
-        .pagination button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        .page-number {
-            font-size: 16px;
-            color: #b8860b;
-        }
-    </style>
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.modal-content {
+  background-color: #111;
+  margin: 15% auto;
+  padding: 20px;
+  border: 2px solid #b8860b;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+}
+.close {
+  color: #b8860b;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close:hover,
+.close:focus {
+  color: #daa520;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
-
 <footer class="footer">
-    <h2>Telecommunication Support</h2>
-    <div class="categories-container" id="categoriesContainer">
-        
-        <!-- Support Section -->
-        <div class="category">
-            <h3>Support</h3>
-            <div class="link-box"><a href="#">Customer Experience Support by Smashing Goods Support</a></div>
-            <div class="link-box"><a href="#">Online Support by Arturo Technologies</a></div>
-            <div class="link-box"><a href="#">Replacement Parts by Fractal Galaxy</a></div>
-        </div>
-        
-        <!-- Policies Section -->
-        <div class="category">
-            <h3>Policies</h3>
-            <div class="link-box"><a href="#">Privacy Policy by Martinez Worldwide</a></div>
-            <div class="link-box"><a href="#">Investor Relations by Martinez USA</a></div>
-            <div class="link-box"><a href="#">Standardization by REASONS</a></div>
-        </div>
-        
-        <!-- Engineering Section -->
-        <div class="category">
-            <h3>Engineering</h3>
-            <div class="link-box"><a href="#">Distribution Map by Arturo Engineering</a></div>
-            <div class="link-box"><a href="#">Engineering Management by Martinez Industries</a></div>
-            <div class="link-box"><a href="#">Clean Energy by Fast Solar Energy Group</a></div>
-        </div>
-
- <!-- Labor & Defense Section -->
+<h2>Telecommunication Support</h2>
+<div class="pagination">
+  <button id="prevBtn">Previous</button>
+  <span class="page-number" id="pageNumber">Swipe Page 1 of 4</span>
+  <button id="nextBtn">Next</button>
+</div>
+<div class="categories-container" id="categoriesContainer">
+  <!-- Support Section -->
+  <div class="category">
+    <h3>Support</h3>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/iframe1">Customer Experience Support by Smashing Goods Support</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/iframe2">Online Support by Arturo Technologies</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/iframe3">Replacement Parts by Fractal Galaxy</a></div>
+  </div>
+  <!-- Other sections... -->
+   <!-- Policies Section -->
 <div class="category">
-    <h3>Labor & Defense</h3>
-    <div class="link-box"><a href="#">Built on Labor by Moco Pools</a></div>
-    <div class="link-box"><a href="#">Defended by BANCS</a></div>
+  <h3>Policies</h3>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/privacy-policy">Privacy Policy by Martinez Worldwide</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/investor-relations">Investor Relations by Martinez USA</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/standardization">Standardization by REASONS</a></div>
+</div>
+
+<!-- Engineering Section -->
+<div class="category">
+  <h3>Engineering</h3>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/distribution-map">Distribution Map by Arturo Engineering</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/engineering-management">Engineering Management by Martinez Industries</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/clean-energy">Clean Energy by Fast Solar Energy Group</a></div>
+</div>
+
+<!-- Labor & Defense Section -->
+<div class="category">
+  <h3>Labor & Defense</h3>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/built-on-labor">Built on Labor by Moco Pools</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/defended-by-bancs">Defended by BANCS</a></div>
 </div>
 
 <!-- Sport & Fitness Section - Part 1 -->
 <div class="category">
-    <h3>Sport & Fitness</h3>
-    
-    <!-- Management -->
-    <p>Management</p>
-    <div class="link-box"><a href="#">Martinez Sport & Fitness</a></div>
-    
-    <!-- White Label -->
-    <p>White Label</p>
-    <div class="link-box"><a href="#">Washingtonian Fitness Commission</a></div>
-    <div class="link-box"><a href="#">Washingtonian Fitness</a></div>
-    <div class="link-box"><a href="#">Washingtonian Fitness Group</a></div>
-    <div class="link-box"><a href="#">General Sports & Fitness</a></div>
-    <div class="link-box"><a href="#">General Athletics</a></div>
+  <h3>Sport & Fitness</h3>
+  
+  <!-- Management -->
+  <p>Management</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/martinez-sport-fitness">Martinez Sport & Fitness</a></div>
+  
+  <!-- White Label -->
+  <p>White Label</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/washingtonian-fitness-commission">Washingtonian Fitness Commission</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/washingtonian-fitness">Washingtonian Fitness</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/washingtonian-fitness-group">Washingtonian Fitness Group</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/general-sports-fitness">General Sports & Fitness</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/general-athletics">General Athletics</a></div>
 </div>
 
 <!-- Sport & Fitness Section - Part 2 -->
 <div class="category">
-    <h3>Sport & Fitness</h3>
-    
-    <!-- Athletes -->
-    <p>Athletes</p>
-    <div class="link-box"><a href="#">Sebastian "#77" Martinez</a></div>
-    
-    <!-- Leagues -->
-    <p>Leagues</p>
-    <div class="link-box"><a href="#">Maryland Adult Football Association</a></div>
-    
-    <!-- Clubs/Teams -->
-    <p>Clubs & Teams</p>
-    <div class="link-box"><a href="#">Maryland Football Club</a></div>
-    <div class="link-box"><a href="#">Maryland FC Strikers</a></div>
+  <h3>Sport & Fitness</h3>
+  
+  <!-- Athletes -->
+  <p>Athletes</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/sebastian-martinez">Sebastian "#77" Martinez</a></div>
+  
+  <!-- Leagues -->
+  <p>Leagues</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/maryland-adult-football-association">Maryland Adult Football Association</a></div>
+  
+  <!-- Clubs/Teams -->
+  <p>Clubs & Teams</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/maryland-football-club">Maryland Football Club</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/maryland-fc-strikers">Maryland FC Strikers</a></div>
 </div>
 
 <!-- Additional sections, ensuring each section is wrapped in its own <div class="category"> -->
 <!-- Sport & Fitness Section - Part 3 -->
 <div class="category">
-    <h3>Sport & Fitness</h3>
-    
-    <!-- Challenge Team -->
-    <p>Challenge Team</p>
-    <div class="link-box"><a href="#">10K Football</a></div>
-    
-    <!-- eSports -->
-    <p>eSports</p>
-    <div class="link-box"><a href="#">Maryland Gamers</a></div>
-    
-    <!-- Nutrition -->
-    <p>Nutrition</p>
-    <div class="link-box"><a href="#">EChat Nutrition</a></div>
+  <h3>Sport & Fitness</h3>
+  
+  <!-- Challenge Team -->
+  <p>Challenge Team</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/10k-football">10K Football</a></div>
+  
+  <!-- eSports -->
+  <p>eSports</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/maryland-gamers">Maryland Gamers</a></div>
+  
+  <!-- Nutrition -->
+  <p>Nutrition</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/echat-nutrition">EChat Nutrition</a></div>
 </div>
 
 <!-- Sport & Fitness Section - Part 4 -->
 <div class="category">
-    <h3>Sport & Fitness</h3>
-    
-    <!-- Fitness -->
-    <p>Fitness</p>
-    <div class="link-box"><a href="#">Solstice Fitness</a></div>
-    
-    <!-- Agency -->
-    <p>Agency</p>
-    <div class="link-box"><a href="#">Baseball Upgrades</a></div>
-    <div class="link-box"><a href="#">Soccer Upgrades</a></div>
+  <h3>Sport & Fitness</h3>
+  
+  <!-- Fitness -->
+  <p>Fitness</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/solstice-fitness">Solstice Fitness</a></div>
+  
+  <!-- Agency -->
+  <p>Agency</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/baseball-upgrades">Baseball Upgrades</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/soccer-upgrades">Soccer Upgrades</a></div>
 </div>
 
 <!-- Real Estate Section -->
 <div class="category">
-    <h3>Real Estate</h3>
-    <p>Clubs & Associations</p>
-    <div class="link-box"><a href="#">Fraternal Order of River Football</a></div>
+  <h3>Real Estate</h3>
+  <p>Clubs & Associations</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/fraternal-order-of-river-football">Fraternal Order of River Football</a></div>
 </div>
 
 <!-- Continue similarly for each section --> 
 
 <!-- Engineering & Technology Section - Part 1 -->
 <div class="category">
-    <h3>Engineering & Technology</h3>
-    <p>Engineering Design Management</p>
-    <div class="link-box"><a href="#">Arturo Engineering</a></div>
-    
-    <p>White Label</p>
-    <div class="link-box"><a href="#">Shapeshifters Engineering</a></div>
-    <div class="link-box"><a href="#">Engineered Solutions</a></div>
-    <div class="link-box"><a href="#">Applied Ontology</a></div>
-    <div class="link-box"><a href="#">Ontology Process</a></div>
+  <h3>Engineering & Technology</h3>
+  <p>Engineering Design Management</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/arturo-engineering">Arturo Engineering</a></div>
+  
+  <p>White Label</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/shapeshifters-engineering">Shapeshifters Engineering</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/engineered-solutions">Engineered Solutions</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/applied-ontology">Applied Ontology</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/ontology-process">Ontology Process</a></div>
 </div>
 
 <!-- Engineering & Technology Section - Part 2 -->
 <div class="category">
-    <h3>Engineering & Technology</h3>
-    <p>Electrical Engineering Management</p>
-    <div class="link-box"><a href="#">Arturo Technologies</a></div>
-    
-    <p>White Label</p>
-    <div class="link-box"><a href="#">Nanotech America</a></div>
+  <h3>Engineering & Technology</h3>
+  <p>Electrical Engineering Management</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/arturo-technologies">Arturo Technologies</a></div>
+  
+  <p>White Label</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/nanotech-america">Nanotech America</a></div>
 </div>
 
 <!-- Engineering & Technology Section - Part 3 -->
 <div class="category">
-    <h3>Engineering & Technology</h3>
-    <p>Web Development</p>
-    <div class="link-box"><a href="#">Score Engineering</a></div>
-    <div class="link-box"><a href="#">Batter Street</a></div>
-    
-    <p>Network Engineering</p>
-    <div class="link-box"><a href="#">General Network Systems</a></div>
-    <div class="link-box"><a href="#">Lease Data (DHCP)</a></div>
+  <h3>Engineering & Technology</h3>
+  <p>Web Development</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/score-engineering">Score Engineering</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/batter-street">Batter Street</a></div>
+  
+  <p>Network Engineering</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/general-network-systems">General Network Systems</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/lease-data-dhcp">Lease Data (DHCP)</a></div>
 </div>
 
 <!-- Engineering & Technology Section - Part 4 -->
 <div class="category">
-    <h3>Engineering & Technology</h3>
-    <p>Programming Languages</p>
-    <div class="link-box"><a href="#">Sector Technologies Patch</a></div>
-    <div class="link-box"><a href="#">Sector Technologies HLL</a></div>
-    <div class="link-box"><a href="#">Sector Technologies</a></div>
-    <div class="link-box"><a href="#">Sector Technologies Assembly Languages</a></div>
-    <div class="link-box"><a href="#">Sector Technologies ML</a></div>
-    <div class="link-box"><a href="#">Sector Technologies HDL</a></div>
-    <div class="link-box"><a href="#">Sector Tech</a></div>
-    <div class="link-box"><a href="#">Circuit Feedback</a></div>
+  <h3>Engineering & Technology</h3>
+  <p>Programming Languages</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/sector-technologies-patch">Sector Technologies Patch</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/sector-technologies-hll">Sector Technologies HLL</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/sector-technologies">Sector Technologies</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/sector-technologies-assembly-languages">Sector Technologies Assembly Languages</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/sector-technologies-ml">Sector Technologies ML</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/sector-technologies-hdl">Sector Technologies HDL</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/sector-tech">Sector Tech</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/circuit-feedback">Circuit Feedback</a></div>
 </div>
 
 <!-- Engineering & Technology Section - Part 5 -->
 <div class="category">
-    <h3>Engineering & Technology</h3>
-    <p>Cloud Computing</p>
-    <div class="link-box"><a href="#">Amazon Performance</a></div>
-    
-    <p>Solar Energy</p>
-    <div class="link-box"><a href="#">Fast Solar Energy Group</a></div>
-    <div class="link-box"><a href="#">Solar Team & Club</a></div>
-    
-    <p>Biology</p>
-    <div class="link-box"><a href="#">Anthropic Designs</a></div>
+  <h3>Engineering & Technology</h3>
+  <p>Cloud Computing</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/amazon-performance">Amazon Performance</a></div>
+  
+  <p>Solar Energy</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/fast-solar-energy-group">Fast Solar Energy Group</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/solar-team-club">Solar Team & Club</a></div>
+  
+  <p>Biology</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/anthropic-designs">Anthropic Designs</a></div>
 </div>
 
 <!-- Engineering & Technology Section - Part 6 -->
 <div class="category">
-    <h3>Engineering & Technology</h3>
-    <p>Aerospace</p>
-    <div class="link-box"><a href="#">Industrial Space Commission</a></div>
-    
-    <p>Data Management</p>
-    <div class="link-box"><a href="#">Transnational Data Recovery</a></div>
+  <h3>Engineering & Technology</h3>
+  <p>Aerospace</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/industrial-space-commission">Industrial Space Commission</a></div>
+  
+  <p>Data Management</p>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/transnational-data-recovery">Transnational Data Recovery</a></div>
 </div>
 
 <!-- Education Section -->
 <div class="category">
-    <h3>Education</h3>
-    <div class="link-box"><a href="#">General University</a></div>
-    <div class="link-box"><a href="#">Martinez University</a></div>
-    <div class="link-box"><a href="#">Martinez Education</a></div>
-    <div class="link-box"><a href="#">Martinez Bookstore</a></div>
-    <div class="link-box"><a href="#">Essential Jobs University</a></div>
-    <div class="link-box"><a href="#">Astro Elite Bookstores</a></div>
-    <div class="link-box"><a href="#">Lexicology Process</a></div>
-    <div class="link-box"><a href="#">General Education</a></div>
+  <h3>Education</h3>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/general-university">General University</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/martinez-university">Martinez University</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/martinez-education">Martinez Education</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/martinez-bookstore">Martinez Bookstore</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/essential-jobs-university">Essential Jobs University</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/astro-elite-bookstores">Astro Elite Bookstores</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/lexicology-process">Lexicology Process</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/general-education">General Education</a></div>
 </div>
 
 <!-- Other Section -->
 <div class="category">
-    <h3>Other</h3>
-    <div class="link-box"><a href="#">Influence Index</a></div>
-    <div class="link-box"><a href="#">Moco Pools</a></div>
-    <div class="link-box"><a href="#">Royalty Free Licensing</a></div>
-    <div class="link-box"><a href="#">Wix Dynamics</a></div>
-    <div class="link-box"><a href="#">AT&T Clients on Demand</a></div>
-    <div class="link-box"><a href="#">Intel Accelerator</a></div>
+  <h3>Other</h3>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/influence-index">Influence Index</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/moco-pools">Moco Pools</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/royalty-free-licensing">Royalty Free Licensing</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/wix-dynamics">Wix Dynamics</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/att-clients-on-demand">AT&T Clients on Demand</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/intel-accelerator">Intel Accelerator</a></div>
 </div>
 
 <!-- Shops Section -->
 <div class="category">
-    <h3>Shops</h3>
-    <div class="link-box"><a href="#">Planet Wipe</a></div>
-    <div class="link-box"><a href="#">Early Mart</a></div>
-    <div class="link-box"><a href="#">Mall Parking Shop</a></div>
-    <div class="link-box"><a href="#">Oxygen Globe</a></div>
+  <h3>Shops</h3>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/planet-wipe">Planet Wipe</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/early-mart">Early Mart</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/mall-parking-shop">Mall Parking Shop</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/oxygen-globe">Oxygen Globe</a></div>
 </div>
 
 <!-- Fashion Section -->
 <div class="category">
-    <h3>Fashion</h3>
-    <div class="link-box"><a href="#">Martinez Fashion</a></div>
-    <div class="link-box"><a href="#">General Fashion</a></div>
+  <h3>Fashion</h3>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/martinez-fashion">Martinez Fashion</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/general-fashion">General Fashion</a></div>
 </div>
 
 <!-- Investment & Finance Section -->
 <div class="category">
-    <h3>Investment & Finance</h3>
-    <div class="link-box"><a href="#">Martinez USA</a></div>
-    <div class="link-box"><a href="#">Martinez Worldwide</a></div>
-    <div class="link-box"><a href="#">General Financial Group</a></div>
-    <div class="link-box"><a href="#">Beta Acquisitions</a></div>
-    <div class="link-box"><a href="#">Claims Source</a></div>
-    <div class="link-box"><a href="#">Inspection Dynamics</a></div>
-    <div class="link-box"><a href="#">Audit Defender</a></div>
+  <h3>Investment & Finance</h3>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/martinez-usa">Martinez USA</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/martinez-worldwide">Martinez Worldwide</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/general-financial-group">General Financial Group</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/beta-acquisitions">Beta Acquisitions</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/claims-source">Claims Source</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/inspection-dynamics">Inspection Dynamics</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/audit-defender">Audit Defender</a></div>
 </div>
 
 <!-- Satire Section -->
 <div class="category">
-    <h3>Satire</h3>
-    <div class="link-box"><a href="#">El Sebolla</a></div>
-    <div class="link-box"><a href="#">Nutritional Retreat System</a></div>
-    <div class="link-box"><a href="#">Draft Journalism</a></div>
-    <div class="link-box"><a href="#">Baltimore Journal</a></div>
-    <div class="link-box"><a href="#">Secret Santa</a></div>
-    <div class="link-box"><a href="#">Droid Hut</a></div>
+  <h3>Satire</h3>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/el-sebolla">El Sebolla</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/nutritional-retreat-system">Nutritional Retreat System</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/draft-journalism">Draft Journalism</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/baltimore-journal">Baltimore Journal</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/secret-santa">Secret Santa</a></div>
+  <div class="link-box"><a href="#" class="modal-link" data-url="https://example.com/droid-hut">Droid Hut</a></div>
 </div>
 <div class="category">
     <h3>Shapeshifters Engineering Github</h3>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Shapeshifters-Engineering">Shapeshifters Engineering</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/CVSProducts">CVS Products</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/vendor-scraper">Vendor Scraper</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Shapeshifters-Engineering">Shapeshifters Engineering</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/CVSProducts">CVS Products</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/vendor-scraper">Vendor Scraper</a></div>
 </div>
-
 
 <div class="category">
     <h3>Spirit</h3>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Mata-Diablo-Crystals">Mata Diablo Crystals</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/CatholicRadio">Catholic Radio</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Catholic-Keyboard">Catholic Keyboard</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Instagram-Frame-Catholic">Instagram Frame Catholic</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Mata-Diablo-Crystals">Mata Diablo Crystals</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/CatholicRadio">Catholic Radio</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Catholic-Keyboard">Catholic Keyboard</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Instagram-Frame-Catholic">Instagram Frame Catholic</a></div>
 </div>
-
 
 <div class="category">
     <h3>Martinez Industries Github</h3>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/iPhone-Website-">iPhone Website</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Martinezworldwide.github.io">Martinez Worldwide</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/wixeditor">Wix Editor</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/engineering-mall">Engineering Mall</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/iPhone-Website-">iPhone Website</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Martinezworldwide.github.io">Martinez Worldwide</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/wixeditor">Wix Editor</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/engineering-mall">Engineering Mall</a></div>
 </div>
-
 
 <div class="category">
     <h3>Martinez Sports & Fitness Github</h3>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/10kfootball">10k Football</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Soccer-Upgrades">Soccer Upgrades</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Instagram-Frame-Str1kercoach">Instagram Frame Str1kercoach</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/esports">Esports</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/musiclabel">Music Label</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/str1kercoachtv">Str1ker Coach TV</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Telecommunication-Support-iframe">Telecommunication Support Iframe</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Telecommunication-Support">Telecommunication Support</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/10kfootball">10k Football</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Soccer-Upgrades">Soccer Upgrades</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Instagram-Frame-Str1kercoach">Instagram Frame Str1kercoach</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/esports">Esports</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/musiclabel">Music Label</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/str1kercoachtv">Str1ker Coach TV</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Telecommunication-Support-iframe">Telecommunication Support Iframe</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Telecommunication-Support">Telecommunication Support</a></div>
 </div>
-
 
 <div class="category">
     <h3>Music</h3>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/musiclabel">Music Label</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/esports">Esports</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/str1kercoachtv">Str1ker Coach TV</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Native-American-Sounds">Native American Sounds</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Heavy-Metal-Sounds">Heavy Metal Sounds</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Classical-Sounds">Classical Sounds</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Synthwave-EDM-Sounds">Synthwave & EDM Sounds</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Hip-Hop-Sounds">Hip Hop Sounds</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Ambient-Sleep-Sounds">Ambient Sleep Sounds</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Latin-Sounds">Latin Sounds</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Jazz-Sounds">Jazz Sounds</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/musiclabel">Music Label</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/esports">Esports</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/str1kercoachtv">Str1ker Coach TV</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Native-American-Sounds">Native American Sounds</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Heavy-Metal-Sounds">Heavy Metal Sounds</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Classical-Sounds">Classical Sounds</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Synthwave-EDM-Sounds">Synthwave & EDM Sounds</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Hip-Hop-Sounds">Hip Hop Sounds</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Ambient-Sleep-Sounds">Ambient Sleep Sounds</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Latin-Sounds">Latin Sounds</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Jazz-Sounds">Jazz Sounds</a></div>
 </div>
-
 
 <div class="category">
     <h3>Open Source</h3>
-    
 </div>
 
 <div class="category">
     <h3>Education Github</h3>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/be-fast-astro">Be Fast Astro</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/collegemajors">College Majors</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/be-fast-astro">Be Fast Astro</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/collegemajors">College Majors</a></div>
 </div>
-
 
 <div class="category">
     <h3>Interesting</h3>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/order-tester">Order Tester</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/MyAndroidApp">My Android App</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/commandcenter">Command Center</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/mp3editor">MP3 Editor</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/csstemplates">CSS Templates</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/order-tester">Order Tester</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/MyAndroidApp">My Android App</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/commandcenter">Command Center</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/mp3editor">MP3 Editor</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/csstemplates">CSS Templates</a></div>
 </div>
-
 
 <div class="category">
     <h3>Tools</h3>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/OnlineCodeEditor">Online Code Editor</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/iframegenerator">Iframe Generator</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/nginx-World-Clock">NGINX World Clock</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/searchengine">Search Engine</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/wixeditor">Wix Editor</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/url-shortener">URL Shortener</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/RetroWebsite">Retro Website</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/abc-or-number-ordering">ABC or Number Ordering</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/engineering-keyboard">Engineering Keyboard</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/rssfeed">RSS Feed</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Instagram-Frame-Catholic">Instagram Frame Catholic</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Instagram-Frame-Str1kercoach">Instagram Frame Str1kercoach</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/truthessays">Truth Essays</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Telecommunication-Support-iframe">Telecommunication Support Iframe</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/image-editor">Image Editor</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Language-Translator">Language Translator</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/meme-generator">Meme Generator</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/texteditor">Text Editor</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/topbottomimage">Top Bottom Image</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/csstemplates">CSS Templates</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/OnlineCodeEditor">Online Code Editor</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/iframegenerator">Iframe Generator</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/nginx-World-Clock">NGINX World Clock</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/searchengine">Search Engine</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/wixeditor">Wix Editor</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/url-shortener">URL Shortener</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/RetroWebsite">Retro Website</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/abc-or-number-ordering">ABC or Number Ordering</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/engineering-keyboard">Engineering Keyboard</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/rssfeed">RSS Feed</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Instagram-Frame-Catholic">Instagram Frame Catholic</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Instagram-Frame-Str1kercoach">Instagram Frame Str1kercoach</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/truthessays">Truth Essays</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Telecommunication-Support-iframe">Telecommunication Support Iframe</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/image-editor">Image Editor</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Language-Translator">Language Translator</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/meme-generator">Meme Generator</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/texteditor">Text Editor</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/topbottomimage">Top Bottom Image</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/csstemplates">CSS Templates</a></div>
 </div>
 
-
- <div class="category">
+<div class="category">
     <h3>Networking Github</h3>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Tag-Soccer-Coaches-App">Tag Soccer Coaches App</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Telecommunication-Support">Telecommunication Support</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Nuclear-Panel">Nuclear Panel</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/ST-Protocol">ST Protocol</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/url-shortener">URL Shortener</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/A-Machine-Language-Else">A Machine Language Else</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Art-Gallery-Chat">Art Gallery Chat</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/mallparkingshop">Mall Parking Shop</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/retrobbs">Retro BBS</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/AngelfireWebsite">Angelfire Website</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/HighTechWebsite">High Tech Website</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/str1kercoachtv">Str1ker Coach TV</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/RTMP-Lease">RTMP Lease</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/Telecommunication-Support-iframe">Telecommunication Support Iframe</a></div>
-    <div class="link-box"><a href="https://martinezworldwide.github.io/RockyBalboaTheme">Rocky Balboa Theme</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Tag-Soccer-Coaches-App">Tag Soccer Coaches App</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Telecommunication-Support">Telecommunication Support</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Nuclear-Panel">Nuclear Panel</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/ST-Protocol">ST Protocol</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/url-shortener">URL Shortener</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/A-Machine-Language-Else">A Machine Language Else</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Art-Gallery-Chat">Art Gallery Chat</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/mallparkingshop">Mall Parking Shop</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/retrobbs">Retro BBS</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/AngelfireWebsite">Angelfire Website</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/HighTechWebsite">High Tech Website</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/str1kercoachtv">Str1ker Coach TV</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/RTMP-Lease">RTMP Lease</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/Telecommunication-Support-iframe">Telecommunication Support Iframe</a></div>
+    <div class="link-box"><a href="#" class="modal-link" data-url="https://martinezworldwide.github.io/RockyBalboaTheme">Rocky Balboa Theme</a></div>
 </div>
-
-
-</div>
-        
-    
 </footer>
 
+<!-- Modal Structure -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <iframe id="modalIframe" src="" width="100%" height="400px" frameborder="0"></iframe>
+  </div>
+</div>
+
 <script>
-    const categoriesContainer = document.getElementById('categoriesContainer');
-    const pageNumber = document.getElementById('pageNumber');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const categories = document.querySelectorAll('.category');
+const categoriesContainer = document.getElementById('categoriesContainer');
+const pageNumber = document.getElementById('pageNumber');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const categories = document.querySelectorAll('.category');
+let currentPage = 0;
+const totalPages = categories.length;
 
-    let currentPage = 0;
-    const totalPages = categories.length;
+function updateSlider() {
+  const offset = currentPage * categories[0].offsetWidth;
+  categoriesContainer.scrollTo({ left: offset, behavior: 'smooth' });
+  pageNumber.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+  prevBtn.disabled = currentPage === 0;
+  nextBtn.disabled = currentPage === totalPages - 1;
+}
 
-    function updateSlider() {
-        const offset = currentPage * categories[0].offsetWidth;
-        categoriesContainer.scrollTo({ left: offset, behavior: 'smooth' });
-        pageNumber.textContent = `Page ${currentPage + 1} of ${totalPages}`;
-        prevBtn.disabled = currentPage === 0;
-        nextBtn.disabled = currentPage === totalPages - 1;
-    }
-
-    prevBtn.addEventListener('click', () => {
-        if (currentPage > 0) {
-            currentPage--;
-            updateSlider();
-        }
-    });
-
-    nextBtn.addEventListener('click', () => {
-        if (currentPage < totalPages - 1) {
-            currentPage++;
-            updateSlider();
-        }
-    });
-
-    // Touch event handling for swiping
-    let startX;
-    categoriesContainer.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-    });
-
-    categoriesContainer.addEventListener('touchend', (e) => {
-        const endX = e.changedTouches[0].clientX;
-        if (endX < startX - 50 && currentPage < totalPages - 1) {
-            // Swiped left
-            currentPage++;
-            updateSlider();
-        } else if (endX > startX + 50 && currentPage > 0) {
-            // Swiped right
-            currentPage--;
-            updateSlider();
-        }
-    });
-
+prevBtn.addEventListener('click', () => {
+  if (currentPage > 0) {
+    currentPage--;
     updateSlider();
-</script>
+  }
+});
 
+nextBtn.addEventListener('click', () => {
+  if (currentPage < totalPages - 1) {
+    currentPage++;
+    updateSlider();
+  }
+});
+
+// Touch event handling for swiping
+let startX;
+categoriesContainer.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+});
+categoriesContainer.addEventListener('touchend', (e) => {
+  const endX = e.changedTouches[0].clientX;
+  if (endX < startX - 50 && currentPage < totalPages - 1) {
+    // Swiped left
+    currentPage++;
+    updateSlider();
+  } else if (endX > startX + 50 && currentPage > 0) {
+    // Swiped right
+    currentPage--;
+    updateSlider();
+  }
+});
+updateSlider();
+
+// Modal functionality
+const modal = document.getElementById('myModal');
+const modalIframe = document.getElementById('modalIframe');
+const closeBtn = document.querySelector('.close');
+const modalLinks = document.querySelectorAll('.modal-link');
+
+modalLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const url = link.getAttribute('data-url');
+    modalIframe.src = url;
+    modal.style.display = 'block';
+  });
+});
+
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+  modalIframe.src = '';
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target == modal) {
+    modal.style.display = 'none';
+    modalIframe.src = '';
+  }
+});
+</script>
 </body>
 </html>
